@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Story | My Cozy Shelf</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="write.css">
+    <script src="write.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">📚 My Cozy Shelf</a>
+        <nav class="nav-links"><a href="index.html">Home</a><a href="reader.html">Read Book</a><a href="write.html" aria-current="page">Write a Story</a></nav>
+    </header>
+    <main class="writer-layout">
+        <section class="writer-intro">
+            <p class="eyebrow">YOUR WORDS, YOUR WORLD</p>
+            <h1>Write a story ✍️</h1>
+            <p>Start anywhere. Your draft saves automatically in this browser as you write.</p>
+        </section>
+        <section class="writer-card" aria-label="Story editor">
+            <div class="writer-actions">
+                <button class="btn btn-outline" id="new-story" type="button">＋ New story</button>
+                <button class="btn btn-outline" id="download-story" type="button">Download .txt</button>
+                <button class="btn btn-primary" id="save-story" type="button">Save draft</button>
+            </div>
+            <label class="sr-only" for="story-title">Story title</label>
+            <input id="story-title" class="story-title" maxlength="120" placeholder="Give your story a title…">
+            <label class="sr-only" for="story-body">Story text</label>
+            <textarea id="story-body" placeholder="Once upon a time…"></textarea>
+            <div class="writer-status"><span id="save-status" role="status">Ready to write</span><span id="word-count">0 words</span></div>
+        </section>
+        <aside class="drafts-card">
+            <h2>Your drafts</h2>
+            <p>Saved on this device</p>
+            <ul id="draft-list"></ul>
+        </aside>
+    </main>
+</body>
+</html>

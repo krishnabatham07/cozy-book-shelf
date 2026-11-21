@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Reader | My Cozy Shelf</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reader.css">
+
+    <!-- PDF support -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+        defer>
+    </script>
+
+    <!-- DOCX support -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"
+        defer>
+    </script>
+
+    <!-- EPUB support -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        defer>
+    </script>
+
+    <script src="reader.js" defer></script>
+</head>
+
+<body>
+
+    <header class="reader-header">
+
+        <a href="index.html" class="reader-back-link">
+            ← Back to My Cozy Shelf
+        </a>
+
+        <div class="reader-book-heading">
+            <h1 id="reader-book-title">My Book Reader</h1>
+            <p id="reader-book-author">Your personal reading space</p>
+        </div>
+
+        <div class="reader-header-actions">
+
+            <button type="button" id="save-reader-btn">
+                Save Changes
+            </button>
+
+            <button type="button" id="reader-settings-btn">
+                Reading Settings
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="reader-main">
+
+        <!-- BOOK UPLOAD -->
+
+        <section class="reader-file-section">
+
+            <h2>Open Your Book</h2>
+
+            <p>
+                Select a TXT, PDF, EPUB or DOCX book from your computer.
+            </p>
+
+            <form id="reader-upload-form">
+
+                <label for="reader-file">
+                    Choose your book
+                </label>
+
+                <input
+                    type="file"
+                    id="reader-file"
+                    accept=".txt,.pdf,.epub,.docx,text/plain,application/pdf,application/epub+zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    required
+                >
+
+                <button type="submit">
+                    Open Book
+                </button>
+
+            </form>
+
+            <p id="reader-file-message" role="status">
+                Your reading data is saved in this browser.
+            </p>
+
+        </section>
+
+
+        <!-- READING PROGRESS -->
+
+        <section class="reader-progress-section">
+
+            <div class="reader-progress-heading">
+
+                <h2>Reading Progress</h2>
+
+                <span id="reader-progress-text">
+                    0% completed
+                </span>
+
+            </div>
+
+            <progress
+                id="reader-progress-bar"
+                value="0"
+                max="100">
+            </progress>
+
+            <p id="reader-position-text">
+                Start reading to track your progress.
+            </p>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+
+        <section
+            class="reader-settings-panel"
+            id="reader-settings-panel"
+            hidden>
+
+            <h2>Customize Your Reading</h2>
+
+            <div class="reader-setting">
+
+                <label for="reader-font">Font style</label>
+
+                <select id="reader-font">
+                    <option value="serif">Serif</option>
+                    <option value="sans-serif">Sans Serif</option>
+                    <option value="monospace">Monospace</option>
+                </select>
+
+            </div>
+
+            <div class="reader-setting">
+
+                <label for="reader-font-size">Font size</label>
+
+                <input
+                    type="range"
+                    id="reader-font-size"
+                    min="14"
+                    max="32"
+                    value="18"
+                >
+
+                <span id="reader-font-size-value">18px</span>
+
+            </div>
+
+            <div class="reader-setting">
+
+                <label for="reader-line-spacing">Line spacing</label>
+
+                <select id="reader-line-spacing">
+                    <option value="1.5">Compact</option>
+                    <option value="1.8" selected>Normal</option>
+                    <option value="2.2">Relaxed</option>
+                </select>
+
+            </div>
+
+            <div class="reader-setting">
+
+                <label for="reader-theme">Reading theme</label>
+
+                <select id="reader-theme">
+                    <option value="light">Light</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="dark">Dark</option>
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- READING WORKSPACE -->
+
+        <div class="reader-workspace">
+
+            <section class="reader-content-section">
+
+                <div class="reader-toolbar">
+
+                    <h2>Book Content</h2>
+
+                    <div class="reader-toolbar-actions">
+
+                        <button type="button" id="highlight-yellow-btn">
+                            🟡 Highlight
+                        </button>
+
+                        <button type="button" id="highlight-pink-btn">
+                            🩷 Highlight
+                        </button>
+
+                        <button type="button" id="remove-highlight-btn">
+                            Remove Highlight
+                        </button>
+
+                        <button type="button" id="edit-book-text-btn">
+                            Edit My Copy
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p class="reader-instruction">
+                    Select text to highlight it. Add notes and bookmarks
+                    while reading.
+                </p>
+
+                <nav class="reader-page-controls" aria-label="Book pages">
+                    <button type="button" id="reader-prev-page" disabled>← Previous page</button>
+                    <span id="reader-page-label">Page 0 of 0</span>
+                    <button type="button" id="reader-next-page" disabled>Next page →</button>
+                </nav>
+
+                <article
+                    id="reader-book-content"
+                    class="reader-book-content theme-light"
+                    tabindex="0"
+                    aria-label="Book reading content">
+
+                    <div class="reader-empty-state">
+
+                        <h3>Your reading journey starts here 📚</h3>
+
+                        <p>Upload a book to begin reading.</p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- EDIT PERSONAL COPY -->
+
+                <section
+                    id="reader-edit-panel"
+                    class="reader-edit-panel"
+                    hidden>
+
+                    <h3>Edit Your Personal Copy</h3>
+
+                    <p>
+                        Your changes are saved as a personal copy.
+                        The original file on your device is not modified.
+                    </p>
+
+                    <textarea
+                        id="reader-edit-text"
+                        rows="12"
+                        aria-label="Edit book text"
+                        placeholder="Your book text will appear here...">
+                    </textarea>
+
+                    <div class="reader-edit-actions">
+
+                        <button type="button" id="save-book-edit-btn">
+                            Save My Edits
+                        </button>
+
+                        <button type="button" id="cancel-book-edit-btn">
+                            Cancel
+                        </button>
+
+                    </div>
+
+                    <p id="reader-edit-message" role="status"></p>
+
+                </section>
+
+            </section>
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="reader-sidebar">
+
+                <section class="reader-tool-panel">
+
+                    <h2>🔖 Bookmarks</h2>
+
+                    <p>Save your current reading position.</p>
+
+                    <button type="button" id="add-bookmark-btn">
+                        Add Bookmark
+                    </button>
+
+                    <ul id="reader-bookmarks-list">
+                        <li class="reader-empty-item">No bookmarks yet.</li>
+                    </ul>
+
+                </section>
+
+
+                <section class="reader-tool-panel">
+
+                    <h2>📝 Personal Notes</h2>
+
+                    <form id="reader-note-form">
+
+                        <label for="reader-note-title">Note title</label>
+
+                        <input
+                            type="text"
+                            id="reader-note-title"
+                            placeholder="My favourite scene"
+                            required
+                        >
+
+                        <label for="reader-note-content">Your note</label>
+
+                        <textarea
+                            id="reader-note-content"
+                            rows="5"
+                            placeholder="Write your thoughts..."
+                            required>
+                        </textarea>
+
+                        <button type="submit">Save Note</button>
+
+                    </form>
+
+                    <div id="reader-notes-list">
+                        <p class="reader-empty-item">Your notes will appear here.</p>
+                    </div>
+
+                </section>
+
+
+                <section class="reader-tool-panel">
+
+                    <h2>📔 Reading Journal</h2>
+
+                    <form id="reader-journal-form">
+
+                        <label for="reader-journal-entry">
+                            What are you thinking about this book?
+                        </label>
+
+                        <textarea
+                            id="reader-journal-entry"
+                            rows="5"
+                            placeholder="Write your reading reflections..."
+                            required>
+                        </textarea>
+
+                        <button type="submit">Save Journal Entry</button>
+
+                    </form>
+
+                    <div id="reader-journal-list">
+                        <p class="reader-empty-item">Your journal is empty.</p>
+                    </div>
+
+                </section>
+
+
+                <section class="reader-tool-panel">
+
+                    <h2>✨ My Highlights</h2>
+
+                    <p>Your saved highlighted passages.</p>
+
+                    <ul id="reader-highlights-list">
+                        <li class="reader-empty-item">No highlights yet.</li>
+                    </ul>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <footer class="reader-footer">
+
+        <p>Made with love for readers 💗</p>
+
+        <a href="index.html">Return to My Cozy Shelf</a>
+
+    </footer>
+
+</body>
+
+</html>

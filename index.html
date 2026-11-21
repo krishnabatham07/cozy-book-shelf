@@ -1,0 +1,457 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Cozy Shelf | Your Reading Corner</title>
+
+    <meta name="description"
+        content="Discover books, build your personal library, and enjoy your reading journey with My Cozy Shelf.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            📚 My Cozy Shelf
+        </a>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#discover">Discover</a>
+            <a href="#library">My Library</a>
+            <a href="#continue-reading">Continue Reading</a>
+            <a href="reader.html">Read Book</a>
+            <a href="write.html">Write a Story</a>
+        </nav>
+
+        <div class="nav-buttons" id="nav-buttons">
+
+    <!-- Visible when logged out -->
+    <div id="auth-buttons">
+        <a href="login.html" class="btn btn-outline">
+            Login
+        </a>
+
+        <a href="register.html" class="btn btn-outline">
+            Sign Up
+        </a>
+    </div>
+
+    <!-- Visible when logged in -->
+    <div id="user-menu" hidden>
+        <a href="profile.html" class="btn btn-outline">
+            My Profile
+        </a>
+
+        <button type="button"
+                id="logout-btn"
+                class="btn btn-outline">
+            Logout
+        </button>
+    </div>
+
+</div>
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    YOUR LITTLE CORNER OF THE READING WORLD
+                </p>
+
+                <h1>
+                    Find your next
+                    <span>favourite story.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Discover wonderful books, create your own
+                    digital bookshelf, and continue your reading
+                    journey one page at a time.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#discover" class="btn btn-primary">
+                        Discover Books →
+                    </a>
+
+                    <a href="#continue-reading" class="btn btn-primary"> continue reading</a>
+                    <a href="reader.html" class="btn btn-primary">Read a Book</a>
+                    <a href="write.html" class="btn btn-primary">Write a Story ✍️</a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-decoration">
+
+                <div class="hero-book">
+                    <span>✿</span>
+                    <h2>Stories</h2>
+                    <p>Make life a little more magical.</p>
+                </div>
+
+                <div class="floating-note note-one">
+                    ☕ Read. Relax. Repeat.
+                </div>
+
+                <div class="floating-note note-two">
+                    ♡ One more chapter
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <section class="search-section">
+
+            <div class="section-heading">
+
+                <h2>What would you like to read?</h2>
+
+                <p>
+                    Search for your next favourite book.
+                </p>
+
+            </div>
+
+            <form class="search-bar" id="book-search-form">
+
+                <span class="search-icon">🔍</span>
+
+                <input
+                    type="search"
+                    id="book-search"
+                    placeholder="Search by book title or author..."
+                    aria-label="Search books"
+                >
+
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+
+            </form>
+
+            <p class="search-message" id="search-message"
+                aria-live="polite"></p>
+
+        </section>
+
+
+        <!-- ================= CONTINUE READING ================= -->
+
+        <section class="content-section" id="continue-reading">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p>
+                    <h2>Continue Reading 📖</h2>
+                </div>
+
+                <a href="#library" class="text-link">
+                    View My Library →
+                </a>
+
+            </div>
+
+            <div class="empty-state">
+
+                <div class="empty-icon">🌷</div>
+
+                <h3>Your next chapter awaits!</h3>
+
+                <p>
+                    Books you start reading will appear here
+                    so you can easily continue where you stopped.
+                </p>
+
+                <a href="#discover" class="btn btn-primary">
+                    Find a Book
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DISCOVER BOOKS ================= -->
+
+        <section class="content-section" id="discover">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">EXPLORE SOMETHING NEW</p>
+                    <h2>Discover Books ✨</h2>
+                </div>
+
+                <p class="section-description">
+                    Free online books you can open right away.
+                </p>
+
+            </div>
+
+            <div class="filter-buttons" id="genre-filters">
+
+                <button class="filter-btn active" type="button"
+                    data-genre="All">
+                    All Books
+                </button>
+
+                <button class="filter-btn" type="button"
+                    data-genre="Fiction">
+                    Fiction
+                </button>
+
+                <button class="filter-btn" type="button"
+                    data-genre="Fantasy">
+                    Fantasy
+                </button>
+
+                <button class="filter-btn" type="button"
+                    data-genre="Mystery">
+                    Mystery
+                </button>
+
+                <button class="filter-btn" type="button"
+                    data-genre="Self-Help">
+                    Self-Help
+                </button>
+
+            </div>
+
+            <!-- JavaScript will display book cards here -->
+
+            <div class="book-grid" id="discover-books">
+
+                <p class="loading-message">
+                    Your reading collection will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MY LIBRARY ================= -->
+
+        <section class="content-section library-section" id="library">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">YOUR PERSONAL COLLECTION</p>
+                    <h2>My Library 💗</h2>
+                </div>
+
+                <button class="btn btn-primary" id="add-book-btn"
+                    type="button">
+                    + Add Book
+                </button>
+
+            </div>
+
+
+            <!-- Library statistics -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span class="stat-icon">📚</span>
+                    <p>Total Books</p>
+                    <h3 id="total-books">0</h3>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📖</span>
+                    <p>Reading Now</p>
+                    <h3 id="reading-books">0</h3>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">✅</span>
+                    <p>Finished</p>
+                    <h3 id="finished-books">0</h3>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">💌</span>
+                    <p>Wishlist</p>
+                    <h3 id="wishlist-books">0</h3>
+                </div>
+
+            </div>
+
+
+            <!-- Library filters -->
+
+            <div class="library-toolbar">
+
+                <label for="library-filter">
+                    Filter your collection:
+                </label>
+
+                <select id="library-filter">
+
+                    <option value="All">All Books</option>
+
+                    <option value="Reading">Reading Now</option>
+
+                    <option value="Finished">Finished</option>
+
+                    <option value="Wishlist">Wishlist</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- JavaScript will display personal books here -->
+
+            <div class="book-grid" id="library-books">
+
+                <div class="empty-state library-empty">
+
+                    <div class="empty-icon">📚</div>
+
+                    <h3>Your shelf is waiting for stories!</h3>
+
+                    <p>
+                        Add a book to begin building your
+                        personal collection.
+                    </p>
+
+                    <button class="btn btn-primary" type="button"
+                        id="empty-add-book-btn">
+                        + Add Your First Book
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= READING GOAL ================= -->
+
+        <section class="reading-goal">
+
+            <div class="goal-content">
+
+                <p class="eyebrow">SMALL STEPS, BIG STORIES</p>
+
+                <h2>Your Reading Journey 🎯</h2>
+
+                <p>
+                    Every page you read brings you closer
+                    to a new adventure.
+                </p>
+
+            </div>
+
+            <div class="goal-decoration">
+                🌸 📖 ☕
+            </div>
+
+        </section>
+
+
+        <!-- ================= ADD BOOK MODAL ================= -->
+
+        <dialog id="add-book-dialog" class="book-dialog">
+
+            <div class="dialog-header">
+
+                <div>
+                    <p class="eyebrow">GROW YOUR COLLECTION</p>
+                    <h2>Add a New Book 📚</h2>
+                </div>
+
+                <button type="button" id="close-dialog-btn"
+                    class="close-btn" aria-label="Close form">
+                    &times;
+                </button>
+
+            </div>
+
+            <div class="form-group" id="add-book-options">
+                <p>Choose how you want to add your book:</p>
+                <button class="btn btn-primary" type="button" id="choose-online-book">Add an online book</button>
+                <button class="btn btn-outline" type="button" id="choose-local-book">Choose a book from this device</button>
+                <p>From Downloads or another folder: TXT, PDF, EPUB, or DOCX.</p>
+            </div>
+            <form id="online-book-form" hidden>
+                <div class="form-group">
+                    <label for="online-book-url">Book URL</label>
+                    <input type="url" id="online-book-url" required placeholder="Paste a direct book URL">
+                </div>
+                <p>We’ll use the page title when available. No title or author entry needed.</p>
+                <p class="form-message" id="form-message" aria-live="polite"></p>
+                <div class="dialog-actions">
+                    <button type="button" id="back-add-options" class="btn btn-outline">Back</button>
+                    <button type="submit" class="btn btn-primary">Add and Read</button>
+                </div>
+            </form>
+            <input type="file" id="local-book-file" accept=".txt,.pdf,.epub,.docx,text/plain,application/pdf,application/epub+zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+
+        </dialog>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <a href="#home" class="logo">
+            📚 My Cozy Shelf
+        </a>
+
+        <p>
+            Made with ♡ for people who love stories.
+        </p>
+
+        <p class="copyright">
+            &copy; <span id="current-year"></span>
+            My Cozy Shelf. All rights reserved.
+        </p>
+
+    </footer>
+
+
+ <!-- JavaScript files -->
+
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+ <script src="supabase.js"></script>
+
+ <!-- Authentication: Login, Logout and Navbar -->
+ <script src="auth.js"></script>
+
+ <!-- Book collection functionality -->
+ <script src="script.js"></script>
+
+</body>
+</html> 

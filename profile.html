@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | My Cozy Shelf</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f5f0;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #5b4636;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2 {
+            font-size: 23px;
+        }
+
+        nav a, nav button {
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            background: transparent;
+            padding: 9px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .avatar {
+            width: 85px;
+            height: 85px;
+            background: #e9d8c5;
+            color: #5b4636;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 35px;
+            margin: 0 auto 18px;
+        }
+
+        .profile-card h1 {
+            color: #5b4636;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .detail {
+            text-align: left;
+            background: #faf7f3;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 14px 0;
+        }
+
+        .detail strong {
+            display: block;
+            color: #5b4636;
+            margin-bottom: 7px;
+        }
+
+        .detail span {
+            overflow-wrap: anywhere;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 25px;
+            background: #5b4636;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+        }
+
+        #profile-message {
+            margin-top: 15px;
+            color: #a33;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>My Cozy Shelf</h2>
+
+        <nav>
+            <a href="index.html">Home</a>
+
+            <span id="auth-buttons" hidden>
+                <a href="login.html">Login</a>
+                <a href="register.html">Sign Up</a>
+            </span>
+
+            <span id="user-menu" hidden>
+                <a href="profile.html">My Profile</a>
+                <button type="button" id="logout-btn">Logout</button>
+            </span>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="profile-card">
+
+            <div class="avatar">👤</div>
+
+            <h1>My Profile</h1>
+            <p class="subtitle">
+                Welcome to your personal reading space!
+            </p>
+
+            <div class="detail">
+                <strong>Full Name</strong>
+                <span id="profile-name">Loading...</span>
+            </div>
+
+            <div class="detail">
+                <strong>Email Address</strong>
+                <span id="profile-email">Loading...</span>
+            </div>
+
+            <div class="detail">
+                <strong>Account Status</strong>
+                <span>Active</span>
+            </div>
+
+            <p id="profile-message"></p>
+
+            <a href="index.html" class="home-link">
+                Back to My Books
+            </a>
+
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="auth.js"></script>
+
+    <script>
+        async function loadProfile() {
+            const message = document.getElementById("profile-message");
+
+            const { data, error } =
+                await supabaseClient.auth.getSession();
+
+            if (error || !data.session) {
+                window.location.replace("login.html");
+                return;
+            }
+
+            const user = data.session.user;
+
+            const fullName =
+                user.user_metadata?.full_name ||
+                user.email.split("@")[0];
+
+            document.getElementById("profile-name").textContent =
+                fullName;
+
+            document.getElementById("profile-email").textContent =
+                user.email;
+        }
+
+        loadProfile();
+
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (event === "SIGNED_OUT" || !session) {
+                window.location.replace("login.html");
+            }
+        });
+    </script>
+
+</body>
+</html>

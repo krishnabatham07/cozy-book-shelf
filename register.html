@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fbf6ef">
+    <title>Sign Up | My Cozy Shelf</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="auth-page">
+    <header class="auth-header">
+        <a href="index.html" class="auth-brand">📚 <span>My Cozy Shelf</span></a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="auth-nav-cta" href="login.html">Log in</a>
+        </nav>
+    </header>
+    <main class="auth-main auth-main-register">
+        <section class="auth-card" aria-labelledby="register-title">
+            <div class="auth-icon" aria-hidden="true">✨</div>
+            <p class="auth-kicker">MAKE YOURSELF AT HOME</p>
+            <h1 id="register-title">Join the shelf</h1>
+            <p class="auth-subtitle">Create an account for your reading journey.</p>
+            <form id="register-form">
+                <div class="auth-field">
+                    <label for="full-name">Full name</label>
+                    <input type="text" id="full-name" name="name" autocomplete="name" placeholder="Your name" required>
+                </div>
+                <div class="auth-field">
+                    <label for="register-email">Email address</label>
+                    <input type="email" id="register-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+                </div>
+                <div class="auth-field">
+                    <label for="register-password">Create password</label>
+                    <input type="password" id="register-password" name="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+                </div>
+                <div class="auth-field">
+                    <label for="confirm-password">Confirm password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" autocomplete="new-password" minlength="8" placeholder="Enter it again" required>
+                </div>
+                <div class="auth-options auth-terms">
+                    <label><input type="checkbox" id="agree-terms" required> <span>I agree to the terms and conditions.</span></label>
+                </div>
+                <button type="submit" class="auth-button">Create account <span aria-hidden="true">→</span></button>
+                <p id="register-message" class="auth-message" role="status" aria-live="polite"></p>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+        </section>
+        <p class="auth-back"><a href="index.html">← Back to the home page</a></p>
+    </main>
+    <footer class="auth-footer">Made with ♡ for people who love stories.</footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

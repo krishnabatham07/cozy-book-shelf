@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fbf6ef">
+    <title>Login | My Cozy Shelf</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="auth-page">
+    <header class="auth-header">
+        <a href="index.html" class="auth-brand">📚 <span>My Cozy Shelf</span></a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="auth-nav-cta" href="register.html">Create account</a>
+        </nav>
+    </header>
+    <main class="auth-main">
+        <section class="auth-card" aria-labelledby="login-title">
+            <div class="auth-icon" aria-hidden="true">📖</div>
+            <p class="auth-kicker">YOUR READING NOOK</p>
+            <h1 id="login-title">Welcome back</h1>
+            <p class="auth-subtitle">Your next chapter is waiting for you.</p>
+            <form id="login-form">
+                <div class="auth-field">
+                    <label for="login-email">Email address</label>
+                    <input type="email" id="login-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+                </div>
+                <div class="auth-field">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" autocomplete="current-password" placeholder="Enter your password" required>
+                </div>
+                <div class="auth-options">
+                    <label><input type="checkbox" id="remember-me"> <span>Remember me</span></label>
+                </div>
+                <button type="submit" class="auth-button">Log in <span aria-hidden="true">→</span></button>
+                <p id="login-message" class="auth-message" role="status" aria-live="polite"></p>
+            </form>
+            <p class="auth-switch">New to the shelf? <a href="register.html">Create an account</a></p>
+        </section>
+        <p class="auth-back"><a href="index.html">← Back to the home page</a></p>
+    </main>
+    <footer class="auth-footer">Made with ♡ for people who love stories.</footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>
